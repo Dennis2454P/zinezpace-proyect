@@ -19,7 +19,7 @@ import com.sistema.certus.servicio.AlmacenServicioImpl;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminControlador {
+public class administradorController {
 
 	@Autowired
 	private PeliculaRepositorio peliculaRepositorio;

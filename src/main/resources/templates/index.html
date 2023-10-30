@@ -3,21 +3,49 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{master.html}">
 <head>
+	<style>
+	.monjita{
+		color: white;
+		justify-content: space-between;
+		display: flex;
+		align-content: center;
+		align-items: baseline;
+	}
+		display: block;
+		margin-block: auto;
+	}
+	.block{
+	h3{
+		color: goldenrod;
+	}
+
+	</style>
 <meta charset="utf-8">
 <title>Inicio</title>
 	<link rel="stylesheet" href="static/estilos/inicio.css" th:href="@{/estilos/inicio.css}">
 </head>
 <body>
 
-  <div layout:fragment="content">
+  <div layout:fragment="content" >
 	  <img src="" alt="">
+	  <h1 >La monja II</h1>
 
-	<div class="bg-dark p-5 rounded">
-		<img  src="static/estilos/img/sdsds.PNG" th:src="@{/estilos/img/sdsds.PNG}" class="monja">
-	   <h1 >La monja</h1>
-	   <h2>lorem ipsum no se que mas </h2>
-	</div>	
-	
+	  <div class="monjita">
+		  <div class="block">
+		  <h3>El regreso del terror</h3> <br>
+		  <p>La monja (The Nun, título original) es una película de <br>
+			  terror sobrenatural que se estrenó el 7 de septiembre <br>
+			  de 2018. Bajo la dirección de Corin Hardy, la cinta se <br>
+			  integra a una de las sagas más emblemáticas del género: <br>
+			  El conjuro.</p></div>
+	<div class="bg-dark rounded">
+
+		<img  src="static/estilos/img/monjasa.jpg" th:src="@{/estilos/img/monjasa.jpg}" class="monja" style="width:800px;height:400px">
+
+
+	</div>
+
+	  </div>
 	<h4 class="text-light mt-5">Cartelera Semanal</h4>
 	
 	<div class="row">

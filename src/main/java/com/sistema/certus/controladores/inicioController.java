@@ -19,7 +19,7 @@ import com.sistema.certus.repositorios.PeliculaRepositorio;
 
 @Controller
 @RequestMapping("")
-public class HomeControlador {
+public class inicioController {
 
 	@Autowired
 	private PeliculaRepositorio peliculaRepositorio;

@@ -27,10 +27,5 @@ public class Usuario {
     private String email;
     private String contrasena;
 
-    /* @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @Singular
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")  Esta columna "usuario_id" se utiliza como clave foránea en Ticket
-    private List<ticket> tickets;*/
+
 }
