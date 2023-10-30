@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/estilos/perfil.css" th:href="@{/estilos/perfil.css}">
+</head>
+<body>
+<div layout:fragment="content">
+<h2>Mi Perfil</h2>
+<div >
+    <button >Mi Cuenta</button>
+    <button >Mis Boletos</button>
+</div>
+
+<div >
+
+
+    <h3>Bienvenido <input th:value="${Nombre}"></h3>
+    <p>Número:  <input th:value="${telefono}" ></p>
+    <p>Email:  <input  th:value="${email}" ></p>
+    <button >Cerrar Sesión</button>
+</div>
+
+<div >
+    <h2>Historial de compra</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Película</th>
+            <th>Fecha de compra</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>[Nombre de la película]</td>
+            <td>[Fecha]</td>
+            <td>
+                <button >Ver el boleto</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<a href="/"  id="submit" class="submit-button">
+    Regresar
+</a></div>
+</body>
+</html>

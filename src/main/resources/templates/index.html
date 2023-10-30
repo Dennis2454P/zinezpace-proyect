@@ -12,20 +12,20 @@
   <div layout:fragment="content">
 	  <img src="" alt="">
 
-	<div class="bg-light p-5 rounded">
+	<div class="bg-dark p-5 rounded">
 		<img  src="static/estilos/img/sdsds.PNG" th:src="@{/estilos/img/sdsds.PNG}" class="monja">
-	   <h1 class="display-1 text-success">La monja</h1>
+	   <h1 >La monja</h1>
 	   <h2>lorem ipsum no se que mas </h2>
 	</div>	
 	
 	<h4 class="text-light mt-5">Cartelera Semanal</h4>
 	
 	<div class="row">
-	    <div class="col-md-3 my-5" th:each="pelicula : ${ultimasPeliculas}" th:object="${pelicula}">
+	    <div class="col-md-2 my-3"  th:each="pelicula : ${ultimasPeliculas}" th:object="${pelicula}">
 	       <a th:href="@{/peliculas/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration:none;">
 	       <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{titulo}" class="card-img-top">
-	       <div class="card-body">
-	          <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+	       <div class="card-body bg-dark" style="text-align: center; border-radius: 0px 0px 6px 6px;margin: 0;padding: 0">
+	          <h2 class="card-title fs-6 text-light" th:text="*{titulo}"></h2>
 	          <p th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}" class="text-muted small"></p>
 	       </div>
 	       </a>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/estilos/login.css" th:href="@{/estilos/login.css}">
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <div class="formulario">
+        <img class="LogoConLetras" src="static/estilos/img/LogoConLetras" th:src="@{/estilos/img/LogoConLetras.PNG}" >
+
+     <form action="/login" method="post" th:object="${EnvioDeLogin}">
+     <label >Nombre de Usuario:</label>
+     <input type="text" th:field="*{nombre}" name="nombre" required><br><br>
+     <label >Contraseña:</label>
+     <input th:field="*{contrasena}" type="password" name="contrasena" required><br><br>
+     <button type="submit" class="btn-danger">Iniciar Sesion</button>
+     </form>
+    </div>
+
+
+
+</div>
+</body>
+</html>

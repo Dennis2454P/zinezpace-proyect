@@ -1,0 +1,7 @@
+input {
+    border: none; /* Quitar el borde */
+    background: none; /* Quitar el fondo */
+    padding: 0; /* Quitar el relleno */
+    color: white; /* Cambiar el color del texto (opcional) */
+    outline: none;
+}

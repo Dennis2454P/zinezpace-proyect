@@ -13,7 +13,7 @@
 
 		<div class="row">
 			<div class="row">
-				<div class="col-md-3 my-5" th:each="pelicula : ${peliculas}"
+				<div class="col-md-2 my-3" th:each="pelicula : ${peliculas}"
 					th:object="${pelicula}">
 					<a th:href="@{/peliculas/{id}(id=*{id})}" class="card shadow-lg"
 						style="text-decoration: none;"> <img
