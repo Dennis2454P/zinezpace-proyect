@@ -127,4 +127,7 @@ public class Pelicula {
 
 	@ManyToMany(mappedBy = "peliculas")
 	private List<Usuario> usuarios ;
+
+	@OneToOne(mappedBy = "pelicula")
+	private Ticket ticket;
 }
