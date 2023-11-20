@@ -29,7 +29,7 @@ public class administradorController {
 	@Autowired
 	private AlmacenServicioImpl servicio;
 
-	
+
 	@GetMapping("")
 	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo", size = 5) Pageable pageable) {
 		Page<Pelicula> peliculas = peliculaRepositorio.findAll(pageable);
@@ -43,15 +43,15 @@ public class administradorController {
 				.addObject("pelicula", new Pelicula());
 
 	}
-	
+
+
+
 	@PostMapping("/peliculas/nuevo")
 	public ModelAndView registrarPelicula(@Validated Pelicula pelicula,BindingResult bindingResult) {
 		if(bindingResult.hasErrors() || pelicula.getPortada().isEmpty()) {
 			if(pelicula.getPortada().isEmpty()) {
 				bindingResult.rejectValue("portada","MultipartNotEmpty");
 			}
-
-
 			return new ModelAndView("admin/nueva-pelicula")
 					.addObject("pelicula",pelicula);
 
@@ -77,10 +77,8 @@ public class administradorController {
 	@PostMapping("/peliculas/{id}/editar")
 	public ModelAndView actualizarPelicula(@PathVariable Integer id,@Validated Pelicula pelicula,BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
-
 			return new ModelAndView("admin/editar-pelicula")
 					.addObject("pelicula",pelicula);
-
 		}
 		
 		Pelicula peliculaDB = peliculaRepositorio.getOne(id);

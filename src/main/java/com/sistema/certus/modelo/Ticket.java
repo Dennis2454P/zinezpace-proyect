@@ -27,7 +27,8 @@ public class Ticket {
 
 
     @OneToOne
-    @JoinColumn(name = "pelicula_id", referencedColumnName = "id_pelicula")
+    @JoinColumn(name = "pelicula_id",
+            referencedColumnName = "id_pelicula")
     private Pelicula pelicula;
     private long idUsuario;
 }

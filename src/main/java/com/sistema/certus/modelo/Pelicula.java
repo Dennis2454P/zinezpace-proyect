@@ -13,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Pelicula {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =
+			GenerationType.IDENTITY)
 	@Column(name = "id_pelicula")
 	private Integer id;
 
