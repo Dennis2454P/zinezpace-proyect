@@ -5,3 +5,53 @@ input {
     color: white;
     outline: none;
 }
+
+.perfil{
+    display: flex;
+    border: 3px solid white;
+    background-color:#2d2d2d;
+    width: 800px;
+    height: 500px;
+    margin: 100px auto;
+    padding: 50px;
+ justify-content: space-between;
+    border-radius: 12px;
+    align-items: flex-start; /
+}
+body{
+    background-color: #2d2d2d;
+}
+.botones button{
+
+    border: 3px solid white;
+    border-radius: 12px;
+    background: black;
+    color: white ;
+}
+.izquierda{
+    display: flex;
+    margin: auto;
+
+}
+.izquierda img{
+    margin: 80px;
+    width: 200px;
+    height: 200px;
+}
+.derecha{
+    margin:auto;
+    display: flex;
+    flex-direction: column; /* Coloca los elementos uno debajo del otro */
+    align-items: flex-start;
+
+}
+.derecha button{
+    margin-left: auto
+}
+.losinputs h3,h6,button{
+    margin-bottom: 30px;
+}
+.losinputs button, a{
+    display: flex;
+
+}

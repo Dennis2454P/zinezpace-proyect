@@ -1,13 +1,9 @@
 package com.sistema.certus.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -129,4 +125,6 @@ public class Pelicula {
 		this.portada = portada;
 	}
 
+	@ManyToMany(mappedBy = "peliculas")
+	private List<Usuario> usuarios ;
 }

@@ -6,10 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -27,5 +25,11 @@ public class Usuario {
     private String email;
     private String contrasena;
 
-
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "usuario_pelicula",
+            joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "pelicula_id",referencedColumnName = "id_pelicula")
+    )
+    private List<Pelicula> peliculas;
 }
