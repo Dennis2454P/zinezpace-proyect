@@ -29,7 +29,10 @@ public Usuario mostrarUsuario(Long id){
      return DataBasexd.findByid(id);
 }
     public Usuario obtenerUsuarioRegistrado() {
-        return DataBasexd.findFirstByOrderByIdDesc();
+        return DataBasexd.findFirstByOrderByIdAsc();
     }
 
+    public Usuario obtenerUsuarioAutenticado(String nombre) {
+        return DataBasexd.findByNombre(nombre);
+    }
 }
