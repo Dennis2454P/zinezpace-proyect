@@ -1,15 +1,22 @@
 package com.sistema.certus.controladores;
 
 
+import com.sistema.certus.modelo.Pelicula;
 import com.sistema.certus.modelo.Usuario;
 import com.sistema.certus.repositorios.UsuarioRepository;
 import com.sistema.certus.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UsuarioController {
@@ -30,38 +37,41 @@ public class UsuarioController {
         return "Login";
     }
 
-    @GetMapping("/perfil")
-    public String mostrarPerfil(Model model) {
-        Usuario usuarioRegistrado;
-        usuarioRegistrado = LosServicios.obtenerUsuarioRegistrado();
-        if (usuarioRegistrado != null) {
-            model.addAttribute("Nombre", usuarioRegistrado.getNombre());
-            model.addAttribute("apellido", usuarioRegistrado.getApellido());
-            model.addAttribute("telefono", usuarioRegistrado.getTelefono());
-            model.addAttribute("email", usuarioRegistrado.getEmail());
-            return "perfil";
-        } else {
-            return "errores";
-        }
+     @GetMapping("/perfil")
+        public String mostrarPerfil(Model model) {
 
 
-    }
-   /* @GetMapping("/perfil/{id}")
-    public String mostrarPerfil(@PathVariable Long id, Model model) {
-        Usuario usuarioRegistrado = ElRepositorio.findByid(id);
 
-        if (usuarioRegistrado != null) {
+            Usuario usuarioRegistrado;
+            usuarioRegistrado = LosServicios.obtenerUsuarioRegistrado();
+            if (usuarioRegistrado != null) {
+                model.addAttribute("Nombre", usuarioRegistrado.getNombre());
+                model.addAttribute("apellido", usuarioRegistrado.getApellido());
+                model.addAttribute("telefono", usuarioRegistrado.getTelefono());
+                model.addAttribute("email", usuarioRegistrado.getEmail());
+                return "perfil";
+            } else {
+              return "errores";
+            }
 
-            model.addAttribute("nombres", usuarioRegistrado.getNombre());
-            model.addAttribute("apellidos", usuarioRegistrado.getApellido());
-            model.addAttribute("telefonos", usuarioRegistrado.getTelefono());
-            model.addAttribute("emails", usuarioRegistrado.getEmail());
 
-            return "perfil";
-        } else {
-            return "errores";
-        }
-    }*/
+        }  /*
+       @GetMapping("/perfil/{id}")
+        public String mostrarPerfil(@PathVariable Long id, Model model) {
+            Usuario usuarioRegistrado = ElRepositorio.findByid(id);
+
+            if (usuarioRegistrado != null) {
+
+                model.addAttribute("Nombre", usuarioRegistrado.getNombre());
+                model.addAttribute("apellido", usuarioRegistrado.getApellido());
+                model.addAttribute("telefono", usuarioRegistrado.getTelefono());
+                model.addAttribute("email", usuarioRegistrado.getEmail());
+
+                return "perfil";
+            } else {
+                return "errores";
+            }
+        }*/
 //METODOS DE ENVIO DE DATOS
     @PostMapping("/register")
     public String register(@ModelAttribute Usuario usuarios) {
@@ -87,4 +97,10 @@ public class UsuarioController {
         }
     }
 
+
+
 }
+
+
+
+

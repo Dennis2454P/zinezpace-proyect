@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro</title>
+    <link rel="stylesheet" href="static/estilos/registro.css" th:href="@{/estilos/registro.css}">
 </head>
 <body>
 <div layout:fragment="content">
-<h2>Formulario de Registro</h2>
-<form th:object="${EnvioDeRegistro}" action="/register" method="post">
+    <div class="formulario">
+        <img class="LogoConLetras" src="static/estilos/img/LogoConLetras" th:src="@{/estilos/img/LogoConLetras.PNG}" >
+
+        <form th:object="${EnvioDeRegistro}" action="/register" method="post">
     <label for="nombres">Nombres:</label>
              <input th:field="*{nombre}" type="text" name="nombres" id="nombres" required><br><br>
 
@@ -25,9 +28,10 @@
     <label for="contrasena">Contraseña:</label>
                 <input th:field="*{contrasena}" type="password" name="contrasena" id="contrasena" required><br><br>
 
-    <button type="submit" value="Registrarse">registro</button>
+    <button type="submit" class="btn-danger" value="Registrarse"><strong>Registrarse</strong></button>
 
 </form>
+        </div>
 </div>
 </body>
 </html>

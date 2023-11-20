@@ -11,5 +11,7 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
    Usuario findByid(Long id);
    Optional<Usuario> findByNombreAndContrasena(String nombre,String contrasena);
-   Usuario findFirstByOrderByIdDesc();
+   Usuario findFirstByOrderByIdAsc();
+   Usuario findByNombre(String nombre);
+
 }
