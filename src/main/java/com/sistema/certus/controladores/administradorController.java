@@ -31,7 +31,7 @@ public class administradorController {
 
 
 	@GetMapping("")
-	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo", size = 5) Pageable pageable) {
+	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo") Pageable pageable) {
 		Page<Pelicula> peliculas = peliculaRepositorio.findAll(pageable);
 		return new ModelAndView("admin/index").addObject("peliculas", peliculas);
 	}

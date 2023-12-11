@@ -21,7 +21,7 @@ input {
 body{
     background-color: #2d2d2d;
 }
-.botones button{
+.botones button {
 
     border: 3px solid white;
     border-radius: 12px;
@@ -54,4 +54,15 @@ body{
 .losinputs button, a{
     display: flex;
 
+}
+
+#submit{
+    border-radius: 8px;
+    height:30px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    text-decoration: none;
 }

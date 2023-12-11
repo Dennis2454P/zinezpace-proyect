@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla ThymeleafLogin</title>
+    <style>
+        form{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/logincheck}" method="post">
+<input type="text" name="nombre">
+<input type="password" name="contrasena">
+    <button type="submit">Ingresar</button>
+</form>
+</body>
+</html>

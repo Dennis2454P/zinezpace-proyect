@@ -5,6 +5,30 @@
 <head>
 <meta charset="utf-8">
 <title>Administrar Películas</title>
+	<style>
+		#title{
+			color: black;
+		}
+		img {
+			width: 200px;
+			height: 50px;
+			object-fit: cover; /* Otra propiedad útil para manejar el tamaño y recorte */
+		}
+		#carta{
+			width: 250px;
+			height: 400px;
+			object-fit: cover;
+		}
+		.movie{
+			width: 300px;
+			height:800px;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
 </head>
 <body>
 
@@ -14,8 +38,54 @@
 			<a href="/admin/peliculas/nuevo" class="btn btn-light mb-3">
 				Agregar película </a>
 		</div>
+	  <div class="row">
+		  <div th:each="pelicula, rowStat : ${peliculas}" th:object="${pelicula}"
+			   class="card col-md-3 movie">
+			  <a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
+				  <img id="carta" th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="card-img-top img-thumbnail">
+			  </a>
+			  <div id="title" class="card-body">
+				  <h5 class="card-title fs-5 fw-bold" th:text="*{titulo}"></h5>
+				  <p class="card-text" th:text="*{sinopsis}"></p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+				  <li class="list-group-item" th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"></li>
+			  </ul>
+			  <div class="card-body text-end">
+				  <a class="btn btn-light" th:href="@{/admin/peliculas/{id}/editar(id=*{id})}">Editar</a>
+				  <a href="javascript:void(0)" class="btn btn-danger" th:onclick="'eliminarPelicula(' + *{id} +')'">Eliminar</a>
+				  <form th:id="'eliminarPeliculaForm' + *{id}" th:action="@{/admin/peliculas/{id}/eliminar(id=*{id})}" method="post"
+						class="d-none">
+				  </form>
+			  </div>
+		  </div>
+	  </div>
+	  <!--
+	  <div class="card-group">
+		  <div th:each="pelicula : ${peliculas}" th:object="${pelicula}" class="card">
+			  <a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
+				  <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="card-img-top img-thumbnail">
+			  </a>
+			  <div  class="card-body">
+				  <h5  class="card-title fs-5 fw-bold" th:text="*{titulo}"></h5>
+				  <p class="card-text" th:text="*{sinopsis}"></p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+				  <li class="list-group-item" th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"></li>
+			  </ul>
+			  <div class="card-body text-end">
+				  <a class="btn btn-light" th:href="@{/admin/peliculas/{id}/editar(id=*{id})}">Editar</a>
+				  <a href="javascript:void(0)" class="btn btn-danger" th:onclick="'eliminarPelicula(' + *{id} +')'">Eliminar</a>
+				  <form th:id="'eliminarPeliculaForm' + *{id}" th:action="@{/admin/peliculas/{id}/eliminar(id=*{id})}" method="post"
+						class="d-none">
+				  </form>
+			  </div>
+		  </div>
+	  </div>
 		<table class="table table-hover text-light">
 			<thead>
+
+
 				<tr>
 					<th></th>
 					<th>Nombre</th>
@@ -31,13 +101,9 @@
 					   </a>
 					</td>
 					<td>
-						<div th:text="*{titulo}" class="fs-5 fw-bold"></div>
-						<p th:text="*{sinopsis}"></p>
-						<!--<div>
-							<span class="badge rounded-pill bg-light text-dark me-1"
-								th:each="genero : *{generos}" th:text="${genero.titulo}">
-							</span>
-						</div>-->
+						<div  th:text="*{titulo}" class="fs-5 fw-bold"></div>
+						<p  th:text="*{sinopsis}"></p>
+
 					</td>
 					<td th:text="*{#temporals.format(fechaEstreno,'dd/MM/yyyy')}"></td>
 					<td class="text-end">
@@ -50,7 +116,7 @@
 			</tbody>
 		</table>
 
-  </div> 
+  </div> -->
   
   <div layout:fragment="scripts">
       <script>

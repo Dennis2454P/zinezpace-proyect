@@ -10,12 +10,14 @@
 </head>
 <body>
 <div layout:fragment="content">
-
-
+    <div class="antes">
+ <H4>Antes de empezar </H4>
+    <h1>¡INICIA SESION!</h1>
+    </div>
     <div class="formulario">
         <img class="LogoConLetras" src="static/estilos/img/LogoConLetras" th:src="@{/estilos/img/LogoConLetras.PNG}" >
 
-     <form action="/login" method="post" th:object="${EnvioDeLogin}">
+     <form th:action="@{/logincheckp}" method="post" th:object="${EnvioDeLogin}">
      <label >Nombre de Usuario:</label>
      <input type="text" th:field="*{nombre}" name="nombre" required><br><br>
      <label >Contraseña:</label>

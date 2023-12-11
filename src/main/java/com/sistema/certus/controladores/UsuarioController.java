@@ -1,22 +1,23 @@
 package com.sistema.certus.controladores;
 
 
+import com.sistema.certus.excepciones.MiException;
 import com.sistema.certus.modelo.Pelicula;
 import com.sistema.certus.modelo.Usuario;
 import com.sistema.certus.repositorios.UsuarioRepository;
 import com.sistema.certus.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 public class UsuarioController {
@@ -25,6 +26,10 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio LosServicios;
 //METODOS PARA CAMBIOS DE PAGINAS
+  @GetMapping("asientos")
+  public String mostrarasientos(){
+      return "asientos";
+  }
     @GetMapping("/register")
     public String MostrarRegistroPage(Model variable){
         variable.addAttribute("EnvioDeRegistro", new Usuario());
@@ -38,12 +43,12 @@ public class UsuarioController {
     }
 
      @GetMapping("/perfil")
-        public String mostrarPerfil(Model model) {
+        public String mostrarPerfil(Model model, Principal principal) {
 
-
+         String nombreUsuario = principal.getName();
 
             Usuario usuarioRegistrado;
-            usuarioRegistrado = LosServicios.obtenerUsuarioRegistrado();
+            usuarioRegistrado = ElRepositorio.BuscarPorNombre(nombreUsuario);
             if (usuarioRegistrado != null) {
                 model.addAttribute("Nombre", usuarioRegistrado.getNombre());
                 model.addAttribute("apellido", usuarioRegistrado.getApellido());
@@ -73,9 +78,11 @@ public class UsuarioController {
             }
         }*/
 //METODOS DE ENVIO DE DATOS
+
     @PostMapping("/register")
-    public String register(@ModelAttribute Usuario usuarios) {
-        Usuario registrando = LosServicios.RegistrarUser(usuarios.getNombre(), usuarios.getApellido(), usuarios.getTelefono(),usuarios.getEmail(),usuarios.getContrasena());
+    public String register(@ModelAttribute Usuario usuarios, Model model) {
+
+        Usuario registrando = LosServicios.RegistrarUser(usuarios.getNombre(), usuarios.getApellido(), usuarios.getTelefono(), usuarios.getEmail(), usuarios.getContrasena());
         return registrando == null ? "errores" : "redirect:/login";
     }
     @PostMapping("/login")
@@ -99,6 +106,32 @@ public class UsuarioController {
 
 
 
+
+//NUevos metodos
+@GetMapping("/registro1")
+public String Mostrar(){
+    return "registro1";
+}
+    @PostMapping("/Registro1")
+    public String Registro1(@RequestParam String nombre, @RequestParam String apellido, @RequestParam int telefono , @RequestParam String email, @RequestParam String contrasena, ModelMap modelo){
+        try {
+            LosServicios.Registrar2(nombre, apellido, telefono, email, contrasena);
+
+            return "index";
+        } catch (MiException e) {
+            modelo.put("error", e.getMessage());
+            modelo.put("nombre",nombre);
+            return "registro1";
+        }
+    }
+    @GetMapping("/login1")
+    public String Mostrarlogin(@RequestParam(required = false)String error,ModelMap modelo){
+        if(error!= null){
+            modelo.put("error","tienes un error");
+        }
+
+        return "login1";
+    }
 }
 
 

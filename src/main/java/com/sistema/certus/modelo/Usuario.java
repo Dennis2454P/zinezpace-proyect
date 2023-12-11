@@ -1,6 +1,7 @@
 package com.sistema.certus.modelo;
 
 
+import com.sistema.certus.enumeraciones.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,9 @@ public class Usuario {
     private int telefono;
     private String email;
     private String contrasena;
+
+    @Enumerated( EnumType.STRING)
+    private Rol rol;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinTable(
