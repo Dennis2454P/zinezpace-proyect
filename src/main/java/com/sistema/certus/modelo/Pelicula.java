@@ -125,9 +125,5 @@ public class Pelicula {
 		this.portada = portada;
 	}
 
-	@ManyToMany(mappedBy = "peliculas")
-	private List<Usuario> usuarios ;
 
-	@OneToOne(mappedBy = "pelicula")
-	private Ticket ticket;
 }

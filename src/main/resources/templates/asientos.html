@@ -1,28 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asientos cinema</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #242333;
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Lato', 'sans-serif';
+        }
+
+        .movie-container {
+            width: 75%;
+            justify-content: space-around;
+            align-items: flex-end ;
+            display: flex;
 
 
+        }
 
+        .movie-container select {
+            background-color: #fff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 10px;
+            padding: 5px 15px 5px 15px;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
 
+        .container {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
 
+        .seat1{
+            background-color: #444451;
+            height: 10px;
+            width: 15px;
+            margin: 30px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+        }
+        .seat1.selected {
+            background-color: #be0101;
+        }
+
+    /*  .seat1.occupied {
+            background-color: purple;
+        }*/
+        .seat {
+            background-color: #444451;
+            height: 50px;
+            width: 50px;
+            margin: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .seat.selected {
+            background-color: #8f0606;
+        }
+/*
+.seat.occupied{
+    background-color: #8f002b;
+}*/
+
+        .seat:nth-of-type(2) {
+            margin-right: 18px;
+        }
+
+        .seat:nth-last-of-type(2) {
+            margin-left: 18px;
+        }
+
+        .seat:not(.occupied):hover {
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        .showcase .seat:not(.occupied):hover {
+            cursor: default;
+            transform: scale(1);
+        }
+
+        .showcase {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #c2c1c1;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .showcase li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+        }
+
+        .showcase li small {
+            margin-left: 10px;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .screen {
+            background-color: #fff;
+            height: 70px;
+            width: 100%;
+            margin: 15px 0;
+            transform: rotateX(-45deg);
+            box-shadow: 0 3px 10px rgba(255, 255, 255, 0.75);
+        }
+
+        p.text {
+            margin: 5px 0;
+        }
+
+        p.text span {
+            color: #a90f0f;
+        }
+
+        .button-one{
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #8f002b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-one:hover{
+            background-color: rgba(22, 19, 28, 0.33);
+        }
+        .padre{
+            margin-bottom: -150px;
+            gap: 12px;
+            background-color: #ffffff;
+            color:black;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .hija1 {
+            gap: 103px;
+
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+        }
+        . hija2{
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .boton{
+            text-decoration: none;
+        }
+        .button-one {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #be2149;
+            color: white;
+            border: 1px solid #9f1616;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos para la alerta personalizada */
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f8d7da; /* Color de fondo rojo claro, ajusta según tus preferencias */
+            color: #721c24; /* Color de texto oscuro, ajusta según tus preferencias */
+            border: 1px solid #f5c6cb; /* Borde rojo claro, ajusta según tus preferencias */
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
-holaaa pagina asientos
-</body>
+
+<div class="movie-container">
+
+    <div>
+        <label> Precio por estacionamiento</label>
+        <select id="movie" >
+            <option value="20">20 soles</option>
 
 
+        </select>
+    </div>
+    <div>
+        <label> ubicacion</label>
+        <select  id="ubication">
+            <option>Arequipa</option>
+        </select>
+    </div>
+    <div>
+        <label> ruta</label>
+        <select  id="ruta">
+            <option>avenida Alvarez</option>
+        </select>
+    </div>
+    <div class="padre">
+    <p class="text">
+        <div class="hija1">
+        <h4>N°vehiculos</h4><span id="count">0</span></div> <div class="hija2"> <h4>Precio Total:</h4> <span id="total"></span></div>
+    </p>
+    </div>
+</div>
+<br>
 
 
+<ul class="showcase">
+    <li>
+        <div class="seat1"></div>
+        <small>N/A</small>
+    </li>
+
+    <li>
+        <div class="seat1 selected"></div>
+        <small>sleccionar</small>
+    </li>
+
+    <li>
+        <div class="seat1 occupied"></div>
+        <small>ocupado</small>
+    </li>
+</ul>
+
+<div class="container">
+    <div class="screen"></div>
+
+    <div class="row">
+        <div class="seat">1</div>
+        <div class="seat">2</div>
+        <div class="seat">3</div>
+        <div class="seat">4</div>
+        <div class="seat">5</div>
+        <div class="seat">6</div>
+        <div class="seat">7</div>
+        <div class="seat">8</div>
+
+    </div>
+
+    <div class="row">
+        <div class="seat">9</div>
+        <div class="seat">10</div>
+        <div class="seat">11</div>
+        <div class="seat">12</div>
+        <div class="seat">13</div>
+        <div class="seat">14</div>
+        <div class="seat">15</div>
+        <div class="seat">16</div>
+
+    </div>
+
+    <div class="row">
+        <div class="seat">17</div>
+        <div class="seat occupied">18</div>
+        <div class="seat ">19</div>
+        <div class="seat">20</div>
+        <div class="seat occupied">21</div>
+        <div class="seat">22</div>
+        <div class="seat occupied">23</div>
+        <div class="seat occupied">24</div>
+
+    </div>
+</div>
+
+
+<br>
+<a  class="button-one boton" onclick="mostrarAlerta()">COMPRAR BOLETOS</a>
+<div id="customAlert" class="custom-alert">
+    ¡Compra exitosa!
+</div>
 
 <script>
+    function mostrarAlerta() {
+        // Mostrar la alerta personalizada
+        var alerta = document.getElementById('customAlert');
+        alerta.style.display = 'block';
 
+        // Ocultar la alerta después de unos segundos (ajusta según tus preferencias)
+        setTimeout(function() {
+            alerta.style.display = 'none';
+            window.location.href='/';
+        }, 3000); // 3000 milisegundos = 3 segundos
+    }
+    const container = document.querySelector('.container');
+    const seats = document.querySelectorAll('.row .seat:not(.occupied');
+    const count = document.getElementById('count');
+    const total = document.getElementById('total');
+    const movieSelect = document.getElementById('movie');
 
+    populateUI();
+    let ticketPrice = +movieSelect.value;
 
+    // Save selected movie index and price
+    function setMovieData(movieIndex, moviePrice) {
+        localStorage.setItem('selectedMovieIndex', movieIndex);
+        localStorage.setItem('selectedMoviePrice', moviePrice);
+    }
 
+    // update total and count
+    function updateSelectedCount() {
+        const selectedSeats = document.querySelectorAll('.row .seat.selected');
+
+        const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+
+        localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
+        //copy selected seats into arr
+        // map through array
+        //return new array of indexes
+
+        const selectedSeatsCount = selectedSeats.length;
+
+        count.innerText = selectedSeatsCount;
+        total.innerText = selectedSeatsCount * ticketPrice;
+    }
+
+    // get data from localstorage and populate ui
+    function populateUI() {
+        const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+            seats.forEach((seat, index) => {
+                if (selectedSeats.indexOf(index) > -1) {
+                    seat.classList.add('selected');
+                }
+            });
+        }
+
+        const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+        if (selectedMovieIndex !== null) {
+            movieSelect.selectedIndex = selectedMovieIndex;
+        }
+    }
+
+    // Movie select event
+    movieSelect.addEventListener('change', (e) => {
+        ticketPrice = +e.target.value;
+        setMovieData(e.target.selectedIndex, e.target.value);
+        updateSelectedCount();
+    });
+
+    // Seat click event
+    container.addEventListener('click', (e) => {
+        if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+            e.target.classList.toggle('selected');
+
+            updateSelectedCount();
+        }
+    });
+
+    // intial count and total
+    updateSelectedCount();
 </script>
+
+
+</body>
 </html>

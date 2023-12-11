@@ -26,10 +26,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio LosServicios;
 //METODOS PARA CAMBIOS DE PAGINAS
-  @GetMapping("asientos")
-  public String mostrarasientos(){
-      return "asientos";
-  }
+
     @GetMapping("/register")
     public String MostrarRegistroPage(Model variable){
         variable.addAttribute("EnvioDeRegistro", new Usuario());
